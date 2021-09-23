@@ -12,7 +12,6 @@ form.addEventListener('submit', (event) => {
     if ((!stringHasTheWhiteSpaceOrNot(newPassword)) && (!stringHasTheWhiteSpaceOrNot(confirmNewPassword))) {
         if (newPassword === confirmNewPassword) {
             if (newPassword != "") {
-                console.log(newPassword)
                 form.elements['status'].value = "";
                 var url = window.location.href;
                 var xhr = new XMLHttpRequest();
@@ -26,7 +25,6 @@ form.addEventListener('submit', (event) => {
                     }
                 };
                 var data = `{"new_password":"${newPassword}"}`;
-                console.log(data)
                 xhr.send(data);
             } else {
                 form.elements['status'].value = "Password can't be blank.";
@@ -38,11 +36,3 @@ form.addEventListener('submit', (event) => {
         form.elements['status'].value = "Do not use spaces.";
     }
 });
-
-
-var whiteSpace = stringHasTheWhiteSpaceOrNot("MyNameis John");
-if (whiteSpace == true) {
-    console.log("The string has whitespace");
-} else {
-    console.log("The string does not have whitespace");
-}
