@@ -29,9 +29,6 @@ form.addEventListener('submit', (event) => {
                 };
                 var data = `{"new_password":"${newPassword}"}`;
                 xhr.send(data);
-                xhr.DONE(()=>{
-                form.elements['status'].value = "Password updated!";    
-                })
             } else {
                 form.elements['status'].value = "Password can't be blank.";
             }
