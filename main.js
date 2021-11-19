@@ -17,7 +17,17 @@ form.addEventListener('submit', (event) => {
                 var email = url.searchParams.get("email");
                 var post_url = `https://warranty.ml/api/user/resetpassword/${email}`
                 console.log(post_url)
-                var xhr = new XMLHttpRequest();
+                var data = `{"new_password":"${newPassword}"}`;
+                fetch(post_url, {
+                    method: "PATCH",
+                    headers: {'Content-Type': 'application/json'}, 
+                    body: JSON.stringify(data)
+                  }).then(res => {
+                    console.log("Request complete! response:", res);
+                  }).catch(err=>{
+                      console.log('Error in sending password',err);
+                  })
+                /* var xhr = new XMLHttpRequest();
                 xhr.open("PATCH", post_url);
                 xhr.setRequestHeader("Accept", "application/json");
                 xhr.setRequestHeader("Content-Type", "application/json");
@@ -27,9 +37,9 @@ form.addEventListener('submit', (event) => {
                         console.log(xhr.responseText);
                     }
                 };
-                var data = `{"new_password":"${newPassword}"}`;
+               
                 console.log(data)
-                xhr.send(data);
+                xhr.send(data); */
             } else {
                 form.elements['status'].value = "Password can't be blank.";
             }
