@@ -13,9 +13,12 @@ form.addEventListener('submit', (event) => {
         if (newPassword === confirmNewPassword) {
             if (newPassword != "") {
                 form.elements['status'].value = "";
-                var url = window.location.href;
+                var url = new URL(window.location.href);
+                var email = url.searchParams.get("email");
+                var post_url = `https://warranty.ml/api/user/resetpassword/${email}`
+                console.log(post_url)
                 var xhr = new XMLHttpRequest();
-                xhr.open("PATCH", url);
+                xhr.open("PATCH", post_url);
                 xhr.setRequestHeader("Accept", "application/json");
                 xhr.setRequestHeader("Content-Type", "application/json");
                 xhr.onreadystatechange = function() {
@@ -26,6 +29,9 @@ form.addEventListener('submit', (event) => {
                 };
                 var data = `{"new_password":"${newPassword}"}`;
                 xhr.send(data);
+                xhr.DONE(()=>{
+                form.elements['status'].value = "Password updated!";    
+                })
             } else {
                 form.elements['status'].value = "Password can't be blank.";
             }
