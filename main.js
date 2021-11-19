@@ -28,6 +28,7 @@ form.addEventListener('submit', (event) => {
                     }
                 };
                 var data = `{"new_password":"${newPassword}"}`;
+                console.log(data)
                 xhr.send(data);
             } else {
                 form.elements['status'].value = "Password can't be blank.";
